@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct Node
+{
+    int data;
+    struct Node *next;
+}*first;
+void create(int A[],int n)
+{ struct Node *t,*last;
+  int i;    
+  first = (struct Node *)malloc(sizeof(struct Node));
+  first->data = A[0];
+  first->next = NULL;
+  last = first;
+  for(i=0;i<n;i++)
+  {
+    t = (struct Node *)malloc(sizeof(struct Node));
+    t->data = A[i];  
+    t->next = NULL; 
+    last->next = t;
+    last = t;
+  }
+}
+void display(struct Node *p)
+{
+  while(p!=NULL)
+  {
+   printf("%d\t",p->data);
+   p = p->next;
+  }  
+}
+int checkSorted(struct Node *p)
+{ int x = -32768;
+  p = first;    
+  while(p!=NULL)
+  { if(x>p->data)
+     return 0; 
+    else
+      {
+          x = p->data;
+          p=p->next;
+      } 
+  }
+  return 1;
+}
+int main()
+{  int A[] = {2,3,5,6,7,17,10,11,13};
+   create(A,9);
+   display(first);
+   printf("\n%d",checkSorted(first));
+    return 0;
+}
+
+
